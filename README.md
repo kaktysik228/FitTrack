@@ -132,10 +132,7 @@ fittrack/
 │       ├── usecase.puml      # Use Case код на языке PlantUML
 │       └── usecase.png       # Сгенерированное растровое изображение
 ├── src/                      # Исходный программный код
-│   ├── Main.java             # Точка входа в приложение (или main.py)
-│   ├── models/               # Доменные сущности (Client, Ticket, Visit)
-│   └── services/             # Сервисы обработки бизнес-логики
-└── tests/                    # Модульные и интеграционные тесты
+│   └── main.py               # Точка входа в приложение (или main.py)
 ```
 
 ## 🚀 Установка и запуск
@@ -153,12 +150,6 @@ fittrack/
    ```
 
 2. **Скомпилировать и запустить программу:**
-   * Для Java:
-     ```bash
-     cd src
-     javac Main.java
-     java Main
-     ```
    * Для Python:
      ```bash
      python src/main.py
