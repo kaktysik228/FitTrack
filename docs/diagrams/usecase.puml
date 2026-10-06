@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+actor "Администратор" as admin
+actor "Клиент клуба" as client
+
+rectangle "Информационная система «FitTrack»" {
+  usecase "Вход в систему (авторизация)" as UC1
+  usecase "Регистрация нового клиента" as UC2
+  usecase "Просмотр своего профиля" as UC3
+  usecase "Оформление / продление абонемента" as UC4
+  usecase "Просмотр статуса своего абонемента" as UC5
+  usecase "Отметка посещения (фиксация визита)" as UC6
+  usecase "Просмотр личной истории посещений" as UC7
+  usecase "Просмотр списка клиентов" as UC8
+  usecase "Просмотр общей истории посещений" as UC9
+  usecase "Формирование отчёта по посещаемости" as UC10
+}
+
+admin -- UC1
+admin -- UC2
+admin -- UC4
+admin -- UC6
+admin -- UC8
+admin -- UC9
+admin -- UC10
+
+client -- UC1
+client -- UC3
+client -- UC5
+client -- UC7
+@enduml

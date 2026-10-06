@@ -1,0 +1,15 @@
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.iml
+
+# Python / Языковые кеши
+pycache/
+*.pyc
+*.pyo
+venv/
+env/ 
