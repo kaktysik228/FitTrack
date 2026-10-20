@@ -12,4 +12,9 @@ pycache/
 *.pyc
 *.pyo
 venv/
-env/ 
+env/
+
+# БД и Диаграммы
+*.db
+*.bkp
+*.dtmp
