@@ -1,9 +1,6 @@
 -- Включаем поддержку внешних ключей в SQLite
 PRAGMA foreign_keys = ON;
 
--- ========================================================
--- 1. УДАЛЕНИЕ ТАБЛИЦ (в обратном порядке зависимостей)
--- ========================================================
 DROP TABLE IF EXISTS visits;
 DROP TABLE IF EXISTS client_memberships;
 DROP TABLE IF EXISTS clients;
@@ -12,11 +9,7 @@ DROP TABLE IF EXISTS membership_types;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 
--- ========================================================
--- 2. СОЗДАНИЕ ТАБЛИЦ (по порядку зависимостей)
--- ========================================================
-
--- Таблица ролей пользователей (справочник)
+-- Таблица ролей пользователей
 CREATE TABLE roles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     code TEXT NOT NULL UNIQUE,
@@ -34,7 +27,7 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE RESTRICT
 );
 
--- Таблица сотрудников клуба (администраторы ресепшена)
+-- Таблица сотрудников клуба
 CREATE TABLE staff (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL UNIQUE,
@@ -44,7 +37,7 @@ CREATE TABLE staff (
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
--- Таблица справочника тарифов / типов абонементов
+-- Таблица типов абонементов
 CREATE TABLE membership_types (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -70,7 +63,7 @@ CREATE TABLE clients (
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE SET NULL
 );
 
--- Таблица купленных абонементов (клубных карт)
+-- Таблица купленных абонементов
 CREATE TABLE client_memberships (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     client_id INTEGER NOT NULL,
@@ -100,16 +93,12 @@ CREATE TABLE visits (
     FOREIGN KEY (registered_by_staff_id) REFERENCES staff (id) ON DELETE RESTRICT
 );
 
--- ========================================================
--- 3. ТЕСТОВЫЕ ДАННЫЕ (INSERT INTO)
--- ========================================================
-
 -- Роли
 INSERT INTO roles (code, name) VALUES
 ('ADMIN', 'Администратор'),
 ('CLIENT', 'Клиент клуба');
 
--- Пользователи (аккаунты)
+-- Пользователи
 INSERT INTO users (role_id, username, password_hash, is_active) VALUES
 (1, 'admin_kitik', 'hash_admin_123', 1),
 (2, 'varya_tikhova', 'hash_varya_123', 1),
@@ -127,9 +116,9 @@ INSERT INTO membership_types (name, description, price, duration_days, total_vis
 
 -- Клиенты
 INSERT INTO clients (user_id, first_name, last_name, middle_name, phone, email, birth_day, status) VALUES
-(2, 'Варвара', 'Тихова', 'Алексеевна', '+79101234567', 'ivan@mail.ru', '1995-05-14', 'ACTIVE'),
-(3, 'Анатолий', 'Русанов', 'Дмитриевич', '+79207654321', 'anna@yandex.ru', '2001-09-20', 'ACTIVE'),
-(NULL, 'Иван', 'Петров', 'Алексеевич', '+79035554433', NULL, '1988-12-03', 'ACTIVE');
+(2, 'Варвара', 'Тихова', 'Алексеевна', '+79524493645', 'kaktysik.main@gmail.com', '1995-05-14', 'ACTIVE'),
+(3, 'Анатолий', 'Русанов', 'Дмитриевич', '+79625092402', 'ranatd.my@gmail.com', '2001-09-20', 'ACTIVE'),
+(NULL, 'Иван', 'Петров', 'Александрович', '+79527856717', NULL, '1988-12-03', 'ACTIVE');
 
 -- Выданные абонементы
 INSERT INTO client_memberships (client_id, membership_type_id, card_number, start_date, end_date, remaining_visits, status) VALUES

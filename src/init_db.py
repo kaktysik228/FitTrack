@@ -27,7 +27,7 @@ def init_database():
 
         cursor.executescript(sql_script)
         conn.commit()
-        print("[+] База данных успешно создана и заполнена тестовыми данными!\n")
+        print("База данных успешно создана и заполнена тестовыми данными!\n")
 
         # Проверка: выводим список таблиц и количество строк
         check_database(cursor)
