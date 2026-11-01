@@ -116,8 +116,8 @@ INSERT INTO membership_types (name, description, price, duration_days, total_vis
 
 -- Клиенты
 INSERT INTO clients (user_id, first_name, last_name, middle_name, phone, email, birth_day, status) VALUES
-(2, 'Варвара', 'Тихова', 'Алексеевна', '+79524493645', 'kaktysik.main@gmail.com', '1995-05-14', 'ACTIVE'),
-(3, 'Анатолий', 'Русанов', 'Дмитриевич', '+79625092402', 'ranatd.my@gmail.com', '2001-09-20', 'ACTIVE'),
+(2, 'Варвара', 'Тихова', 'Алексеевна', '+79524493645', 'kaktysik.main@gmail.com', '17.12.2007', 'ACTIVE'),
+(3, 'Анатолий', 'Русанов', 'Дмитриевич', '+79625092402', 'ranatd.my@gmail.com', '30.10.2007', 'ACTIVE'),
 (NULL, 'Иван', 'Петров', 'Александрович', '+79527856717', NULL, '1988-12-03', 'ACTIVE');
 
 -- Выданные абонементы

@@ -3,7 +3,7 @@ import sqlite3
 
 # Пути к файлам
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR, "fittrack.db")
+DB_PATH = os.path.join(os.path.dirname(BASE_DIR), "fittrack.db")
 SCHEMA_PATH = os.path.join(BASE_DIR, "schema.sql")
 
 
