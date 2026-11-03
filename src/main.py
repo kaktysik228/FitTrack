@@ -178,7 +178,7 @@ def admin_menu():
                 import sqlite3
                 import os
                 
-                # Находим корень проекта, где лежит ваш настоящий fittrack.db
+                # Находим корень проекта, где лежит настоящий fittrack.db
                 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
                 db_path = os.path.join(base_dir, "fittrack.db")
                 conn = sqlite3.connect(db_path)

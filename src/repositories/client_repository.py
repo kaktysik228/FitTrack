@@ -87,7 +87,6 @@ def get_all_clients() -> list[Client]:
         
         clients_list = []
         for r in rows:
-            # 🔥 ИСПРАВЛЕНИЕ: Раскладываем элементы строго по их индексам от 0 до 5
             client = Client(
                 id=r[0],
                 user_id=r[1],
@@ -105,7 +104,7 @@ def get_all_clients() -> list[Client]:
                 tariff_name = r[9]
                 client.membership_info = f"Карта: {card_num} | Тариф: '{tariff_name}' | Визитов: {visits} | До: {expire_date}"
             else:
-                client.membership_info = "❌ Нет активного абонемента"
+                client.membership_info = " Нет активного абонемента"
                 
             clients_list.append(client)
             

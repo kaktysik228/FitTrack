@@ -103,7 +103,7 @@ def register_new_client(username: str, password_hash: str, first_name: str, last
     user_id = user_repo.create_user(username, password_hash, role_id=2)
     return client_repo.create_client(user_id, first_name, last_name, middle_name if middle_name else None, clean_phone, birth_day_sql)
 
-# --- ОСТАЛЬНЫЕ ФУНКЦИИ СЕРВИСА ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ ---
+
 def assign_membership_to_client(client_id: int, type_id: int, card_number: str, override: bool = False):
     card_number = card_number.strip()
     if not card_number:

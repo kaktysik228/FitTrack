@@ -26,7 +26,7 @@ def create_membership(client_id: int, type_id: int, card_number: str):
         # Деактивируем прошлые абонементы
         cur.execute("UPDATE client_memberships SET status = 'INACTIVE' WHERE client_id = ?", (client_id,))
         
-        # Вставляем данные строго по вашей структуре из IntelliView
+        
         cur.execute("""
             INSERT INTO client_memberships (client_id, membership_type_id, card_number, start_date, end_date, remaining_visits, status)
             VALUES (?, ?, ?, ?, ?, ?, 'ACTIVE')
@@ -40,7 +40,6 @@ def get_active_membership(client_id: int) -> ClientMembership | None:
     conn = get_connection()
     cur = conn.cursor()
     try:
-        # Достаем абсолютно ВСЕ 8 колонок строго по вашей схеме из ER-диаграммы
         cur.execute("""
             SELECT id, client_id, membership_type_id, card_number, start_date, end_date, remaining_visits, status
             FROM client_memberships 
