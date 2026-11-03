@@ -160,7 +160,7 @@ def admin_menu():
                                 # ---------------------------------------------------------------------
                 # ШАГ ПОДТВЕРЖДЕНИЯ ДАННЫХ ПЕРЕД ЗАПИСЬЮ В БАЗУ ДАННЫХ
                 # ---------------------------------------------------------------------
-                print("\n📋 ПРОВЕРКА ВВЕДЕННЫХ ДАННЫХ КЛИЕНТА:")
+                print("\n ПРОВЕРКА ВВЕДЕННЫХ ДАННЫХ КЛИЕНТА:")
                 print(f"  ● Логин: {l}")
                 print(f"  ● Пароль: {p}")
                 print(f"  ● ФИО: {ln} {fn} {mn if mn else '(нет)'}")
@@ -168,15 +168,13 @@ def admin_menu():
                 print(f"  ● Дата рождения: {bd}")
                 print("-" * 40)
                 
-                confirm = input("❓ Все данные введены верно? (да/нет): ").strip().lower()
+                confirm = input(" Все данные введены верно? (да/нет): ").strip().lower()
                 
                 if confirm == "нет":
-                    print("❌ Регистрация отменена. Данные не были сохранены.")
+                    print(" Регистрация отменена. Данные не были сохранены.")
                     continue
                 
-                # ---------------------------------------------------------------------
-                # 🔥 ВСТАВЛЯТЬ СТРОГО СЮДА (ВМЕСТО СТАРЫХ СТРОК user_repo И client_repo)
-                # ---------------------------------------------------------------------
+             
                 import sqlite3
                 import os
                 
@@ -200,12 +198,12 @@ def admin_menu():
                     
                     # Если оба запроса прошли успешно — сохраняем изменения в файл базы данных
                     conn.commit()
-                    print(f"\n✅ Клиент успешно создан! Присвоен ID клиента: {c_id}")
+                    print(f"\n Клиент успешно создан! Присвоен ID клиента: {c_id}")
                     
                 except sqlite3.IntegrityError as ie:
                     # Если упал уникальный телефон или любая другая ошибка БД — отменяем ВСЁ (делаем откат)
                     conn.rollback()
-                    print(f"⚠️ Ошибка базы данных: Данные не сохранены! Проверьте уникальность телефона. ({ie})")
+                    print(f" Ошибка базы данных: Данные не сохранены! Проверьте уникальность телефона. ({ie})")
                 finally:
                     conn.close()
 
@@ -215,7 +213,7 @@ def admin_menu():
                 try:
                     c_id = int(input("Введите ID клиента: "))
                 except ValueError:
-                    print("⚠️ Ошибка: ID клиента должен быть целым числом!")
+                    print(" Ошибка: ID клиента должен быть целым числом!")
                     continue
                 
                 # Показываем доступные тарифы из базы данных
@@ -225,7 +223,7 @@ def admin_menu():
                 cur.execute("SELECT id, name, total_visits, duration_days FROM membership_types WHERE is_active = 1")
                 tariffs = cur.fetchall()
                 
-                print("\n📋 ДОСТУПНЫЕ ТАРИФЫ КЛУБА:")
+                print("\n ДОСТУПНЫЕ ТАРИФЫ КЛУБА:")
                 for t in tariffs:
                     print(f"  [{t[0]}] Тариф: '{t[1]}' | Занятий: {t[2]} | Срок: {t[3]} дней")
                 print("-" * 40)
@@ -233,11 +231,11 @@ def admin_menu():
                 try:
                     t_id = int(input("Выберите ID нужного тарифа из списка выше: "))
                 except ValueError:
-                    print("⚠️ Ошибка: Вы должны ввести числовой ID тарифа!")
+                    print(" Ошибка: Вы должны ввести числовой ID тарифа!")
                     conn.close()
                     continue
 
-                # 🔥 ИСПРАВЛЕНИЕ: Ищем МАКСИМАЛЬНЫЙ ID абонемента в базе, а не количество строк
+                
                 cur.execute("SELECT MAX(id) FROM client_memberships")
                 max_id_row = cur.fetchone()
                 # Если база пустая, max_id будет 0, иначе берем максимальное число
@@ -249,15 +247,15 @@ def admin_menu():
                 
                 try:
                     svc.assign_membership_to_client(c_id, t_id, next_card_number, override=False)
-                    print(f"✅ Абонемент успешно оформлен! Клиенту присвоена карта: {next_card_number}")
+                    print(f" Абонемент успешно оформлен! Клиенту присвоена карта: {next_card_number}")
                 except ValueError as ve:
-                    print(f"\n⚠️ Предупреждение системы безопасности ➔ {ve}")
-                    confirm = input("❓ Вы уверены, что хотите аннулировать текущий тариф и оформить новый поверх? (да/нет): ").strip().lower()
+                    print(f"\n Предупреждение системы безопасности ➔ {ve}")
+                    confirm = input(" Вы уверены, что хотите аннулировать текущий тариф и оформить новый поверх? (да/нет): ").strip().lower()
                     if confirm == "да":
                         svc.assign_membership_to_client(c_id, t_id, next_card_number, override=True)
-                        print(f"✅ Предыдущий абонемент аннулирован. Новый успешно оформлен! Карта: {next_card_number}")
+                        print(f" Предыдущий абонемент аннулирован. Новый успешно оформлен! Карта: {next_card_number}")
                     else:
-                        print("❌ Операция отменена. Текущий тариф клиента остался нетронутым.")
+                        print(" Операция отменена. Текущий тариф клиента остался нетронутым.")
 
 
             elif choice == "3":
@@ -267,7 +265,7 @@ def admin_menu():
                 
             elif choice == "4":
                 clients = svc.get_all_clients_list()
-                print("\n📋 РЕЕСТР КЛИЕНТОВ И ОНЛАЙН-СТАТУС АБОНЕМЕНТОВ:")
+                print("\n РЕЕСТР КЛИЕНТОВ И ОНЛАЙН-СТАТУС АБОНЕМЕНТОВ:")
                 if not clients:
                     print("База клиентов пуста.")
                 for c in clients:
@@ -289,20 +287,20 @@ def admin_menu():
             elif choice == "6":
                 print("\n--- Аннулирование/Удаление абонемента ---")
                 c_id = int(input("Введите ID клиента, чей абонемент нужно удалить: "))
-                confirm = input("❓ Вы точно хотите полностью удалить активный абонемент клиента? (да/нет): ").strip().lower()
+                confirm = input(" Вы точно хотите полностью удалить активный абонемент клиента? (да/нет): ").strip().lower()
                 if confirm == "да":
                     svc.cancel_client_membership(c_id)
-                    print("✅ Абонемент клиента успешно удален из базы данных!")
+                    print(" Абонемент клиента успешно удален из базы данных!")
                 else:
                     print("Операция отменена.")
                     
             elif choice == "7":
                 print("\n--- Полное удаление клиента из системы ---")
                 c_id = int(input("Введите ID клиента для удаления: "))
-                confirm = input("❗ ВНИМАНИЕ: Это полностью удалит клиента, его абонементы и аккаунт! Вы уверены? (да/нет): ").strip().lower()
+                confirm = input(" ВНИМАНИЕ: Это полностью удалит клиента, его абонементы и аккаунт! Вы уверены? (да/нет): ").strip().lower()
                 if confirm == "да":
                     svc.remove_client_from_system(c_id)
-                    print("✅ Клиент и все связанные с ним учетные записи успешно стёрты.")
+                    print(" Клиент и все связанные с ним учетные записи успешно стёрты.")
                 else:
                     print("Операция отменена.")
         
@@ -316,7 +314,7 @@ def client_menu(user_id: int):
         try:
             client, membership = svc.get_client_profile_by_user(user_id)
         except Exception as e:
-            print(f"⚠️ Ошибка профиля: {e}")
+            print(f" Ошибка профиля: {e}")
             return
         print(f"\n--- ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА: {client.first_name} ---")
         print("1. Мой профиль и статус абонемента")
@@ -324,17 +322,17 @@ def client_menu(user_id: int):
         print("0. Выйти из аккаунта")
         choice = input("Выберите действие: ")
         if choice == "1":
-            print("\n📋 ПЕРСОНАЛЬНЫЕ ДАННЫХ ПРОФИЛЯ:")
+            print("\n ПЕРСОНАЛЬНЫЕ ДАННЫХ ПРОФИЛЯ:")
             print(f"  ● ФИО: {client.last_name} {client.first_name} {client.middle_name if client.middle_name else ''}")
             print(f"  ● Телефон: {client.phone}")
             print(f"  ● Email/Почта: {client.email if client.email else 'Не указан'}")
             print(f"  ● Дата рождения: {client.birth_day}")
             print("-" * 40)
-            print("🔐 ДАННЫЕ ДЛЯ ВХОДА В СИСТЕМУ:")
+            print(" ДАННЫЕ ДЛЯ ВХОДА В СИСТЕМУ:")
             print(f"  ● Логин: {client.status}") # Из репозитория подтянули username
             print(f"  ● Пароль: {'*' * len(str(client.created_at)) if client.created_at else '******'} (Зашифрован)")
             print("-" * 40)
-            print("💳 СТАТУС ТЕКУЩЕГО АБОНЕМЕНТА:")
+            print(" СТАТУС ТЕКУЩЕГО АБОНЕМЕНТА:")
             if membership:
                 # Находим человеческое имя тарифа онлайн из базы
                 import repositories.membership_repository as mem_repo
@@ -357,7 +355,7 @@ def client_menu(user_id: int):
             if not history:
                 print("Вы еще не посещали тренировки.")
             for v in history:
-                print(f" 🏃 Визит зафиксирован: {v.check_in_at}")
+                print(f"  Визит зафиксирован: {v.check_in_at}")
         elif choice == "0":
             print("Выход из личного кабинета клиента...")
             break
