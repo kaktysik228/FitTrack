@@ -131,7 +131,7 @@ def admin_menu():
                 while True:
                     bd = input("Дата рождения (ДД.ММ.ГГГГ): ").strip()
                     try:
-                        parts = bd.replace("/", ".").replace(" ", ".").split(".")
+                        parts = bd.replace("/", ".").replace(" ", ".").replace(",", ".").split(".")
                         if len(parts) != 3:
                             raise Exception
                         day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
