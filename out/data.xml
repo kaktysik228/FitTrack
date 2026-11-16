@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<clients_export>
+    <client>
+        <id>1</id>
+        <first_name>Варвара</first_name>
+        <last_name>Тихова</last_name>
+        <phone>+79524493645</phone>
+        <birth_day>17.12.2007</birth_day>
+        <membership>
+            <card_number>CARD-10001</card_number>
+            <remaining_visits>11</remaining_visits>
+            <end_date>2026-03-31</end_date>
+            <tariff_name>Стандарт 12</tariff_name>
+        </membership>
+    </client>
+    <client>
+        <id>2</id>
+        <first_name>Анатолий</first_name>
+        <last_name>Русанов</last_name>
+        <phone>+79625092402</phone>
+        <birth_day>30.10.2007</birth_day>
+        <membership>
+            <card_number>CARD-10002</card_number>
+            <remaining_visits />
+            <end_date>2026-04-04</end_date>
+            <tariff_name>Безлимит Месяц</tariff_name>
+        </membership>
+    </client>
+</clients_export>

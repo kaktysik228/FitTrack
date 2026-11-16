@@ -1,0 +1,20 @@
+- id: 1
+  first_name: Варвара
+  last_name: Тихова
+  phone: '+79524493645'
+  birth_day: 17.12.2007
+  membership:
+    card_number: CARD-10001
+    remaining_visits: 11
+    end_date: '2026-03-31'
+    tariff_name: Стандарт 12
+- id: 2
+  first_name: Анатолий
+  last_name: Русанов
+  phone: '+79625092402'
+  birth_day: 30.10.2007
+  membership:
+    card_number: CARD-10002
+    remaining_visits: null
+    end_date: '2026-04-04'
+    tariff_name: Безлимит Месяц
