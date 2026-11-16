@@ -1,6 +1,7 @@
 import sys
 from datetime import datetime
 import services.services as svc
+from export_data import export_all_formats
 
 def main():
     print("=== Добро пожаловать в ИС 'FitTrack' ===")
@@ -36,6 +37,7 @@ def admin_menu():
         print("5. Посмотреть общий журнал визитов")
         print("6. Удалить абонемент клиента")
         print("7. Полностью удалить клиента из системы")
+        print("8. Выгрузить базу данных (JSON, CSV, XML, YAML)")
         print("0. Выйти в главное меню")
 
         choice = input("Выберите пункт меню: ")
@@ -303,6 +305,11 @@ def admin_menu():
                     print(" Клиент и все связанные с ним учетные записи успешно стёрты.")
                 else:
                     print("Операция отменена.")
+
+            elif choice == "8":
+                print("\n--- Экспорт данных в универсальные форматы ---")
+                export_all_formats()
+
         
             elif choice == "0":
                 break
