@@ -64,15 +64,13 @@ def export_all_formats():
         
     conn.close()
 
-    # =========================================================================
+
     # 1. Сохранение в JSON
-    # =========================================================================
     with open(os.path.join(out_dir, "data.json"), "w", encoding="utf-8") as f:
         json.dump(records, f, ensure_ascii=False, indent=4)
 
-    # =========================================================================
+  
     # 2. Сохранение в CSV
-    # =========================================================================
     flat_records = [flatten_dict(r) for r in records]
     if flat_records:
         headers = []
@@ -86,9 +84,7 @@ def export_all_formats():
             writer.writeheader()
             writer.writerows(flat_records)
 
-    # =========================================================================
     # 3. Сохранение в XML
-    # =========================================================================
     root = ET.Element("clients_export")
     for r in records:
         record_el = ET.SubElement(root, "client")
@@ -98,9 +94,8 @@ def export_all_formats():
     ET.indent(tree, space="    ")
     tree.write(os.path.join(out_dir, "data.xml"), encoding="utf-8", xml_declaration=True)
 
-    # =========================================================================
+
     # 4. Сохранение в YAML
-    # =========================================================================
     with open(os.path.join(out_dir, "data.yaml"), "w", encoding="utf-8") as f:
         yaml.dump(records, f, allow_unicode=True, sort_keys=False)
 
